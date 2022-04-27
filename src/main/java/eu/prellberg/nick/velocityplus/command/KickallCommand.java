@@ -19,12 +19,10 @@ public class KickallCommand implements SimpleCommand {
 
     private final ProxyServer proxyServer;
     private final VelocityPlus velocityPlus;
-    private final Logger logger;
 
     public KickallCommand(ProxyServer proxyServer, VelocityPlus velocityPlus, Logger logger) {
         this.proxyServer = proxyServer;
         this.velocityPlus = velocityPlus;
-        this.logger = logger;
         CommandManager manager = proxyServer.getCommandManager();
         manager.register(manager.metaBuilder("kickall").build(), this);
     }
@@ -33,10 +31,7 @@ public class KickallCommand implements SimpleCommand {
     public void execute(Invocation invocation) {
         CommandSource source = invocation.source();
 
-//        if(source instanceof ConsoleCommandSource) {return;}
-
         if (invocation.arguments().length < 1 || Objects.equals(invocation.arguments()[0], "--force")) {
-            // Check permissions for kickall with no arguments
             if (!source.hasPermission("vplus.kickall.all")) {
                 source.sendMessage(Component.text(String.join(" ", velocityPlus.getConfig().getString("general.prefix"), velocityPlus.getConfig().getString("general.missingPermissions"))));
                 return;
@@ -47,20 +42,20 @@ public class KickallCommand implements SimpleCommand {
             }
             proxyServer.getAllPlayers()
                     .forEach(player -> {
-                        // Return, wenn Sender = Spieler
                         if (source == player) return;
-                        // Return, wenn Spieler hat bypass, sender hat keine Force Permission und Argument ist nicht vorhanden
+
                         if (player.hasPermission("vplus.kickall.bypass") && !source.hasPermission("vplus.kickall.force") && invocation.arguments().length == 0)
                             return;
-                        // Return, wenn Spieler hat bypass, sender hat Force Permission, Argument ist aber nicht vorhanden
+
                         if (player.hasPermission("vplus.kickall.bypass") && source.hasPermission("vplus.kickall.force") && invocation.arguments().length == 0)
                             return;
-                        // Return, wenn Spieler hat bypass, sender hat Force Permission, Argument 0 ist aber nicht --force
+
                         if (player.hasPermission("vplus.kickall.bypass") && source.hasPermission("vplus.kickall.force") && !Objects.equals(invocation.arguments()[0], "--force"))
                             return;
-                        // Return, wenn Spieler hat bypass, sender, hat keine Force Permission und Argument ist --force
+
                         if (player.hasPermission("vplus.kickall.bypass") && !source.hasPermission("vplus.kickall.force") && Objects.equals(invocation.arguments()[0], "--force"))
                             return;
+
                         player.disconnect(
                                 Component.text(String.join(" ", velocityPlus.getConfig().getString("general.prefix"), velocityPlus.getConfig().getString("kickall.command.kicked")))
                         );
@@ -70,7 +65,7 @@ public class KickallCommand implements SimpleCommand {
         }
 
         Optional<RegisteredServer> server = proxyServer.getServer(invocation.arguments()[0].toLowerCase(Locale.ROOT));
-        // Check for Permissions for single Server (Should work)
+
         if (!source.hasPermission("vplus.kickall." + invocation.arguments()[0].toLowerCase(Locale.ROOT))) {
             if (!source.hasPermission("vplus.kickall.all")) {
                 source.sendMessage(Component.text(String.join(" ", velocityPlus.getConfig().getString("general.prefix"), velocityPlus.getConfig().getString("general.missingPermissions"))));
@@ -89,20 +84,21 @@ public class KickallCommand implements SimpleCommand {
 
         server.get().getPlayersConnected()
                 .forEach(player -> {
-                    // Return, wenn Sender = Spieler
+
                     if (source == player) return;
-                    // Return, wenn Spieler hat bypass, sender hat keine Force Permission und Argument ist nicht vorhanden
+
                     if (player.hasPermission("vplus.kickall.bypass") && !source.hasPermission("vplus.kickall.force") && invocation.arguments().length == 1)
                         return;
-                    // Return, wenn Spieler hat bypass, sender hat Force Permission, Argument ist aber nicht vorhanden
+
                     if (player.hasPermission("vplus.kickall.bypass") && source.hasPermission("vplus.kickall.force") && invocation.arguments().length == 1)
                         return;
-                    // Return, wenn Spieler hat bypass, sender hat Force Permission, Argument 0 ist aber nicht --force
+
                     if (player.hasPermission("vplus.kickall.bypass") && source.hasPermission("vplus.kickall.force") && invocation.arguments().length >= 2 && !Objects.equals(invocation.arguments()[1], "--force"))
                         return;
-                    // Return, wenn Spieler hat bypass, sender, hat keine Force Permission und Argument ist --force
+
                     if (player.hasPermission("vplus.kickall.bypass") && !source.hasPermission("vplus.kickall.force") && invocation.arguments().length >= 2 && Objects.equals(invocation.arguments()[1], "--force"))
                         return;
+
                     player.disconnect(
                             Component.text(String.join(" ", velocityPlus.getConfig().getString("general.prefix"), velocityPlus.getConfig().getString("kickall.command.kicked")))
                     );

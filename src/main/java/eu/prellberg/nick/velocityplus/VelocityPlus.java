@@ -15,7 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
-@Plugin(id = "velocityplus", name = "VelocityPlus", version = "1.1.0", authors = {"Nick Prellberg"}, url = "https://github.com/xsehrmotiviert/velocityplus")
+@Plugin(id = "velocityplus", name = "VelocityPlus", version = "1.1.1", authors = {"Nick Prellberg"}, url = "https://github.com/xsehrmotiviert/velocityplus")
 public class VelocityPlus {
 
     private final ProxyServer server;
@@ -47,17 +47,21 @@ public class VelocityPlus {
 
         }
 
-        logger.info("\n\n /$$    /$$          /$$                     /$$   /$$                        \n" +
-                "| $$   | $$         | $$                    |__/  | $$                  /$$   \n" +
-                "| $$   | $$ /$$$$$$ | $$  /$$$$$$   /$$$$$$$ /$$ /$$$$$$   /$$   /$$   | $$   \n" +
-                "|  $$ / $$//$$__  $$| $$ /$$__  $$ /$$_____/| $$|_  $$_/  | $$  | $$ /$$$$$$$$\n" +
-                " \\  $$ $$/| $$$$$$$$| $$| $$  \\ $$| $$      | $$  | $$    | $$  | $$|__  $$__/\n" +
-                "  \\  $$$/ | $$_____/| $$| $$  | $$| $$      | $$  | $$ /$$| $$  | $$   | $$   \n" +
-                "   \\  $/  |  $$$$$$$| $$|  $$$$$$/|  $$$$$$$| $$  |  $$$$/|  $$$$$$$   |__/   \n" +
-                "    \\_/    \\_______/|__/ \\______/  \\_______/|__/   \\___/   \\____  $$          \n" +
-                "                                                           /$$  | $$          \n" +
-                "                                                          |  $$$$$$/          \n" +
-                "                                                           \\______/           \nVersion: 1.1.0");
+        logger.info("""
+
+
+                 /$$    /$$          /$$                     /$$   /$$                       \s
+                | $$   | $$         | $$                    |__/  | $$                  /$$  \s
+                | $$   | $$ /$$$$$$ | $$  /$$$$$$   /$$$$$$$ /$$ /$$$$$$   /$$   /$$   | $$  \s
+                |  $$ / $$//$$__  $$| $$ /$$__  $$ /$$_____/| $$|_  $$_/  | $$  | $$ /$$$$$$$$
+                 \\  $$ $$/| $$$$$$$$| $$| $$  \\ $$| $$      | $$  | $$    | $$  | $$|__  $$__/
+                  \\  $$$/ | $$_____/| $$| $$  | $$| $$      | $$  | $$ /$$| $$  | $$   | $$  \s
+                   \\  $/  |  $$$$$$$| $$|  $$$$$$/|  $$$$$$$| $$  |  $$$$/|  $$$$$$$   |__/  \s
+                    \\_/    \\_______/|__/ \\______/  \\_______/|__/   \\___/   \\____  $$         \s
+                                                                           /$$  | $$         \s
+                                                                          |  $$$$$$/         \s
+                                                                           \\______/          \s
+                Version: 1.1.1""");
 
         new SendCommand(server, this, logger);
         new KickallCommand(server, this, logger);
