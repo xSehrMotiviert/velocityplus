@@ -29,6 +29,8 @@ public record KickallCommand(ProxyServer proxyServer, VelocityPlus velocityPlus,
     public void execute(Invocation invocation) {
         CommandSource source = invocation.source();
 
+//        if(source instanceof ConsoleCommandSource) {return;}
+
         if (invocation.arguments().length < 1 || Objects.equals(invocation.arguments()[0], "--force")) {
             if (!source.hasPermission("vplus.kickall.all")) {
                 source.sendMessage(Component.text(String.join(" ", velocityPlus.getConfig().getString("general.prefix"), velocityPlus.getConfig().getString("general.missingPermissions"))));
