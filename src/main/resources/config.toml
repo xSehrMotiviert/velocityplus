@@ -1,0 +1,34 @@
+[general]
+prefix = "§7[§6V§c+§7]"
+missingPermissions = "§4You do not have permission to execute this command!"
+
+[ip.command]
+result = "§9IP of <<user>> is <<ip>>" # <<user>> = Username | <<ip>> = IP Adress
+missingUser = "§4Please follow this command by a user name."
+userOffline = "§4That user is not online."
+
+[alert.command]
+prefix = "§7[§4Alert§7]"
+missingMessage = "§4You must supply a message."
+
+[find.command]
+result = "§a<<user>> §fis online at <<server>>" # <<user>> = Username | <<server>> = Servername
+missingUser = "§4Please follow this command by a user name."
+userOffline = "§4That user is not online."
+
+[send.command]
+result = "§2Attempting to send <<playercount>> players to <<server>>" # <<playercount>> = Amount of players | <<server>> = Servername
+notEnoughArgs = "§4Not enough arguments, usage: /send <server|player|all|current> <target>"
+notAvailable = "§4Server <<server>> is not available!" # <<server>> = Servername
+notFound = "§4Server <<server>> not found!" # <<server>> = Servername
+
+[kickall.command]
+success = "§2Attempting to kick players from proxy."
+kicked = "§fYou got kicked from the proxy."
+notFound = "§4The specified server does not exist."
+
+[goto.command]
+result = "§2Going to §a<<user>> §2on server §a<<server>>" # <<user>> = Username | <<server>> = Servername
+sameServer = "§2You are already on the same server."
+missingUser = "§4Please follow this command by a user name."
+userOffline = "§4That user is not online."
