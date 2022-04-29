@@ -15,14 +15,12 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class KickallCommand implements SimpleCommand {
-
-    private final ProxyServer proxyServer;
-    private final VelocityPlus velocityPlus;
+public record KickallCommand(ProxyServer proxyServer, VelocityPlus velocityPlus, Logger logger) implements SimpleCommand {
 
     public KickallCommand(ProxyServer proxyServer, VelocityPlus velocityPlus, Logger logger) {
         this.proxyServer = proxyServer;
         this.velocityPlus = velocityPlus;
+        this.logger = logger;
         CommandManager manager = proxyServer.getCommandManager();
         manager.register(manager.metaBuilder("kickall").build(), this);
     }
@@ -30,6 +28,8 @@ public class KickallCommand implements SimpleCommand {
     @Override
     public void execute(Invocation invocation) {
         CommandSource source = invocation.source();
+
+//        if(source instanceof ConsoleCommandSource) {return;}
 
         if (invocation.arguments().length < 1 || Objects.equals(invocation.arguments()[0], "--force")) {
             if (!source.hasPermission("vplus.kickall.all")) {

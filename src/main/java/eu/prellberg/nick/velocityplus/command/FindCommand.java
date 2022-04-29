@@ -15,11 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class FindCommand implements SimpleCommand {
-
-    private final ProxyServer proxyServer;
-    private final VelocityPlus velocityPlus;
-    private final Logger logger;
+public record FindCommand(ProxyServer proxyServer, VelocityPlus velocityPlus, Logger logger) implements SimpleCommand {
 
     public FindCommand(ProxyServer proxyServer, VelocityPlus velocityPlus, Logger logger) {
         this.proxyServer = proxyServer;
