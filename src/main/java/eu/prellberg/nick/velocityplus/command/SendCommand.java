@@ -12,11 +12,7 @@ import org.slf4j.Logger;
 
 import java.util.*;
 
-public class SendCommand implements SimpleCommand {
-
-    private final ProxyServer proxyServer;
-    private final VelocityPlus velocityPlus;
-    private final Logger logger;
+public record SendCommand(ProxyServer proxyServer, VelocityPlus velocityPlus, Logger logger) implements SimpleCommand {
 
     public SendCommand(ProxyServer proxyServer, VelocityPlus velocityPlus, Logger logger) {
         this.proxyServer = proxyServer;
