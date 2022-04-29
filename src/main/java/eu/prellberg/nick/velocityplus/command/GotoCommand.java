@@ -6,23 +6,17 @@ import com.velocitypowered.api.command.SimpleCommand;
 import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.proxy.ServerConnection;
-import com.velocitypowered.api.proxy.server.RegisteredServer;
 import eu.prellberg.nick.velocityplus.VelocityPlus;
 import net.kyori.adventure.text.Component;
 import org.slf4j.Logger;
 
-import java.net.CookiePolicy;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class GotoCommand implements SimpleCommand {
-
-    private final ProxyServer proxyServer;
-    private final VelocityPlus velocityPlus;
-    private final Logger logger;
+public record GotoCommand(ProxyServer proxyServer, VelocityPlus velocityPlus, Logger logger) implements SimpleCommand {
 
     public GotoCommand(ProxyServer proxyServer, VelocityPlus velocityPlus, Logger logger) {
         this.proxyServer = proxyServer;
@@ -35,7 +29,7 @@ public class GotoCommand implements SimpleCommand {
     @Override
     public void execute(Invocation invocation) {
         CommandSource source = invocation.source();
-        if(!source.hasPermission("vplus.goto")) {
+        if (!source.hasPermission("vplus.goto")) {
             source.sendMessage(Component.text(String.join(" ", velocityPlus.getConfig().getString("general.prefix"), velocityPlus.getConfig().getString("general.missingPermissions"))));
             return;
         }
@@ -54,7 +48,7 @@ public class GotoCommand implements SimpleCommand {
 
         Player sourcePlayer = (Player) source;
 
-        if(Objects.equals(server.get().getServerInfo().getName(), sourcePlayer.getCurrentServer().get().getServerInfo().getName())) {
+        if (Objects.equals(server.get().getServerInfo().getName(), sourcePlayer.getCurrentServer().get().getServerInfo().getName())) {
             source.sendMessage(Component.text(String.join(" ", velocityPlus.getConfig().getString("general.prefix"), velocityPlus.getConfig().getString("goto.command.sameServer"))));
             return;
         }

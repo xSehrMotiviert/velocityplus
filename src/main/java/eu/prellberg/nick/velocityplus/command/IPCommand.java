@@ -14,11 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class IPCommand implements SimpleCommand {
-
-    private final ProxyServer proxyServer;
-    private final VelocityPlus velocityPlus;
-    private final Logger logger;
+public record IPCommand(ProxyServer proxyServer, VelocityPlus velocityPlus, Logger logger) implements SimpleCommand {
 
     public IPCommand(ProxyServer proxyServer, VelocityPlus velocityPlus, Logger logger) {
         this.proxyServer = proxyServer;
@@ -42,7 +38,7 @@ public class IPCommand implements SimpleCommand {
         }
 
         Optional<Player> playerFound = proxyServer.getPlayer(invocation.arguments()[0]);
-        if(playerFound.isEmpty()) {
+        if (playerFound.isEmpty()) {
             source.sendMessage(Component.text(String.join(" ", velocityPlus.getConfig().getString("general.prefix"), velocityPlus.getConfig().getString("ip.command.userOffline"))));
             return;
         }

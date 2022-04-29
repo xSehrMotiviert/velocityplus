@@ -11,13 +11,9 @@ import net.kyori.adventure.text.JoinConfiguration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.slf4j.Logger;
 
-import eu.prellberg.nick.velocityplus.utils.formatParser;
+import eu.prellberg.nick.velocityplus.utils.FormatParser;
 
-public class AlertCommand implements SimpleCommand {
-
-    private final ProxyServer proxyServer;
-    private final VelocityPlus velocityPlus;
-    private final Logger logger;
+public record AlertCommand(ProxyServer proxyServer, VelocityPlus velocityPlus, Logger logger) implements SimpleCommand {
 
     public AlertCommand(ProxyServer proxyServer, VelocityPlus velocityPlus, Logger logger) {
         this.proxyServer = proxyServer;
@@ -41,7 +37,7 @@ public class AlertCommand implements SimpleCommand {
         }
 
         String text = String.join(" ", invocation.arguments());
-        text = new formatParser().parse(text);
+        text = new FormatParser().parse(text);
         for (Player player : this.proxyServer.getAllPlayers()) {
             player.sendMessage(Component.join(JoinConfiguration.separator(Component.text(" ")), Component.text(velocityPlus.getConfig().getString("alert.command.prefix")), MiniMessage.miniMessage().deserialize(text)));
         }
