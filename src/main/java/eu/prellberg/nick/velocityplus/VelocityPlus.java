@@ -21,12 +21,14 @@ public class VelocityPlus {
     private final ProxyServer server;
     private final Logger logger;
     private final String configPath;
+    private final Metrics.Factory metricsFactory;
 
     @Inject
-    public VelocityPlus(ProxyServer server, Logger logger) {
+    public VelocityPlus(ProxyServer server, Logger logger, Metrics.Factory metricsFactory) {
         this.server = server;
         this.logger = logger;
         this.configPath = "./plugins/VelocityPlus/config.toml";
+        this.metricsFactory = metricsFactory;
 
 
         logger.info("[V+] Ready for duty!");
@@ -46,6 +48,9 @@ public class VelocityPlus {
             }
 
         }
+
+        int bStatsId = 15064;
+        Metrics metrics = metricsFactory.make(this, bStatsId);
 
         logger.info("""
 

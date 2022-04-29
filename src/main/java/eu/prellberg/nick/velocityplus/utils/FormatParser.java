@@ -37,7 +37,7 @@ public class FormatParser {
             newString.set(string.replaceAll("&" + legacyCode, miniMessage));
             newString.set(string.replaceAll("§" + legacyCode, miniMessage));
         });
-        
+
         return newString.get();
     }
 }
