@@ -42,7 +42,7 @@ public class VelocityPlus {
                 assert configTemplate != null;
                 Files.write(config, configTemplate.readAllBytes(), StandardOpenOption.CREATE_NEW);
             } catch (IOException e) {
-                logger.error("New IO Exception: ", e);
+                logger.error("There was an error creating the config file! Report the stacktrace to https://github.com/xSehrMotiviert/velocityplus/issues", e);
             }
 
         }

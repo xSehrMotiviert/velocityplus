@@ -6,22 +6,22 @@ import java.util.concurrent.atomic.AtomicReference;
 public class FormatParser {
 
     HashMap<String, String> legacyCodes = new HashMap<>() {{
-        put("0", "<#000000>");
-        put("1", "<#0000aa>");
-        put("2", "<#00aa00>");
-        put("3", "<#00aaaa>");
-        put("4", "<#0000aa>");
-        put("5", "<#aa00aa>");
-        put("6", "<#ffaa00>");
-        put("7", "<#aaaaaa>");
-        put("8", "<#555555>");
-        put("9", "<#5555ff>");
-        put("a", "<#55ff55>");
-        put("b", "<#55ffff>");
-        put("c", "<#ff5555>");
-        put("d", "<#ff55ff>");
-        put("e", "<#ffff55>");
-        put("f", "<#ffffff>");
+        put("0", "<black>");
+        put("1", "<dark_blue>");
+        put("2", "<dark_green>");
+        put("3", "<dark_aqua>");
+        put("4", "<dark_red>");
+        put("5", "<dark_purple>");
+        put("6", "<gold>");
+        put("7", "<gray>");
+        put("8", "<dark_gray>");
+        put("9", "<blue>");
+        put("a", "<green>");
+        put("b", "<aqua>");
+        put("c", "<red>");
+        put("d", "<light_purple>");
+        put("e", "<yellow>");
+        put("f", "<white>");
         put("k", "<obf>");
         put("l", "<b>");
         put("m", "<st>");
