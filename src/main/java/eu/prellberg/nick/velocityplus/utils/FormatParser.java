@@ -36,8 +36,8 @@ public class FormatParser {
         AtomicReference<String> newString = new AtomicReference<>(string);
 
         legacyCodes.forEach((legacyCode, miniMessage) -> {
-            newString.set(string.replaceAll("&" + legacyCode, miniMessage));
-            newString.set(string.replaceAll("§" + legacyCode, miniMessage));
+            newString.set(newString.get().replaceAll("&" + legacyCode, miniMessage));
+            newString.set(newString.get().replaceAll("§" + legacyCode, miniMessage));
         });
 
         return newString.get();
