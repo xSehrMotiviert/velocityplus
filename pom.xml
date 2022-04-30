@@ -6,7 +6,7 @@
 
     <groupId>eu.prellberg.nick</groupId>
     <artifactId>velocityplus</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.3</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -47,6 +47,39 @@
             <artifactId>adventure-text-minimessage</artifactId>
             <version>4.10.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-velocity</artifactId>
+            <version>3.0.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <relocations>
+                        <relocation>
+                            <pattern>org.bstats</pattern>
+                            <!-- Replace this with your package! -->
+                            <shadedPattern>eu.prellberg.nick.velocityplus.Metrics</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

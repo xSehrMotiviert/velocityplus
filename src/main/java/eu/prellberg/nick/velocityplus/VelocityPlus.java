@@ -15,18 +15,20 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
-@Plugin(id = "velocityplus", name = "VelocityPlus", version = "1.1.1", authors = {"Nick Prellberg"}, url = "https://github.com/xsehrmotiviert/velocityplus")
+@Plugin(id = "velocityplus", name = "VelocityPlus", version = "1.1.3", authors = {"Nick Prellberg"}, url = "https://github.com/xsehrmotiviert/velocityplus")
 public class VelocityPlus {
 
     private final ProxyServer server;
     private final Logger logger;
     private final String configPath;
+    private final Metrics.Factory metricsFactory;
 
     @Inject
-    public VelocityPlus(ProxyServer server, Logger logger) {
+    public VelocityPlus(ProxyServer server, Logger logger, Metrics.Factory metricsFactory) {
         this.server = server;
         this.logger = logger;
         this.configPath = "./plugins/VelocityPlus/config.toml";
+        this.metricsFactory = metricsFactory;
 
 
         logger.info("[V+] Ready for duty!");
@@ -42,10 +44,13 @@ public class VelocityPlus {
                 assert configTemplate != null;
                 Files.write(config, configTemplate.readAllBytes(), StandardOpenOption.CREATE_NEW);
             } catch (IOException e) {
-                logger.error("New IO Exception: ", e);
+                logger.error("There was an error creating the config file! Report the stacktrace to https://github.com/xSehrMotiviert/velocityplus/issues", e);
             }
 
         }
+
+        int bStatsId = 15064;
+        Metrics metrics = metricsFactory.make(this, bStatsId);
 
         logger.info("""
 
@@ -61,7 +66,7 @@ public class VelocityPlus {
                                                                            /$$  | $$         \s
                                                                           |  $$$$$$/         \s
                                                                            \\______/          \s
-                Version: 1.1.1""");
+                Version: 1.1.3""");
 
         new SendCommand(server, this, logger);
         new KickallCommand(server, this, logger);
