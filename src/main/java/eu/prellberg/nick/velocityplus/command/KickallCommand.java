@@ -6,6 +6,7 @@ import com.velocitypowered.api.command.SimpleCommand;
 import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
 import eu.prellberg.nick.velocityplus.VelocityPlus;
+import eu.prellberg.nick.velocityplus.utils.FormatParser;
 import net.kyori.adventure.text.Component;
 import org.slf4j.Logger;
 
@@ -28,6 +29,9 @@ public record KickallCommand(ProxyServer proxyServer, VelocityPlus velocityPlus,
     @Override
     public void execute(Invocation invocation) {
         CommandSource source = invocation.source();
+
+        var formatParser = new FormatParser();
+        var kickText = formatParser.parse(velocityPlus.getConfig().getString("kickall.command.kicked"));
 
 //        if(source instanceof ConsoleCommandSource) {return;}
 
@@ -57,7 +61,7 @@ public record KickallCommand(ProxyServer proxyServer, VelocityPlus velocityPlus,
                             return;
 
                         player.disconnect(
-                                Component.text(String.join(" ", velocityPlus.getConfig().getString("general.prefix"), velocityPlus.getConfig().getString("kickall.command.kicked")))
+                                Component.text(String.join(" ", velocityPlus.getConfig().getString("general.prefix"), kickText))
                         );
                     });
             source.sendMessage(Component.text(String.join(" ", velocityPlus.getConfig().getString("general.prefix"), velocityPlus.getConfig().getString("kickall.command.success"))));
@@ -100,7 +104,7 @@ public record KickallCommand(ProxyServer proxyServer, VelocityPlus velocityPlus,
                         return;
 
                     player.disconnect(
-                            Component.text(String.join(" ", velocityPlus.getConfig().getString("general.prefix"), velocityPlus.getConfig().getString("kickall.command.kicked")))
+                            Component.text(String.join(" ", velocityPlus.getConfig().getString("general.prefix"), kickText))
                     );
                 });
         source.sendMessage(Component.text(String.join(" ", velocityPlus.getConfig().getString("general.prefix"), velocityPlus.getConfig().getString("kickall.command.success"))));
