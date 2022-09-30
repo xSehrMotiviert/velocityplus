@@ -44,6 +44,6 @@ A Velocity proxy plugin which adds customizable commands from the bungeecord pro
 - [x] Added configurable texts
 - [x] Configuration file with texts and prefix. (Alert command has its own prefix)
 - [x] Implement format parser to Alert command
-- [ ] Implement format parser to Kickall command
+- [x] Implement format parser to Kickall command
 - [ ] Implement format parser to configs for advanced text formatting.
 - [ ] Add placeholder function for every text. (I may add placeholderAPI support, but I'm not sure)
