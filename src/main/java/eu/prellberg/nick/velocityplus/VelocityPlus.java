@@ -15,7 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
-@Plugin(id = "velocityplus", name = "VelocityPlus", version = "1.1.3", authors = {"Nick Prellberg"}, url = "https://github.com/xsehrmotiviert/velocityplus")
+@Plugin(id = "velocityplus", name = "VelocityPlus", version = "1.1.4", authors = {"Nick Prellberg"}, url = "https://github.com/xsehrmotiviert/velocityplus")
 public class VelocityPlus {
 
     private final ProxyServer server;
@@ -50,7 +50,7 @@ public class VelocityPlus {
         }
 
         int bStatsId = 15064;
-        Metrics metrics = metricsFactory.make(this, bStatsId);
+        metricsFactory.make(this, bStatsId);
 
         logger.info("""
 
@@ -66,14 +66,14 @@ public class VelocityPlus {
                                                                            /$$  | $$         \s
                                                                           |  $$$$$$/         \s
                                                                            \\______/          \s
-                Version: 1.1.3""");
+                Version: 1.1.4""");
 
         new SendCommand(server, this, logger);
         new KickallCommand(server, this, logger);
         new FindCommand(server, this, logger);
         new IPCommand(server, this, logger);
         new AlertCommand(server, this, logger);
-        new GotoCommand(server, this,logger);
+        new GotoCommand(server, this, logger);
 
     }
 
