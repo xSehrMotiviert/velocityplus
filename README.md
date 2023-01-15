@@ -1,7 +1,7 @@
 # VelocityPlus
 
 Join my Discord (German)  
-[![Join my Discord (German)](https://img.shields.io/discord/674745039972466688.svg?logo=discord&label=)](https://discord.x-community.net)
+[![Join my Discord (German)](https://img.shields.io/discord/674745039972466688.svg?logo=discord&label=)](https://discord.x-community.net) (KEIN SUPPORT SERVER)
 
 A Velocity proxy plugin which adds customizable commands from the bungeecord proxy and a little bit more.
 
